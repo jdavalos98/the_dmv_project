@@ -33,4 +33,15 @@ RSpec.describe Vehicle do
       expect(@camaro.electric_vehicle?).to eq(false)
     end
   end
+
+  describe '#registered?' do
+   it 'returns true when registration date is set' do
+    vehicle.registration_date = Date.today
+    expect(@vehicle.registered?).to eq(true)
+   end
+
+   it 'returns false if registration date is not set' do 
+    expect(@vehicle.registered?).to eq(false)
+   end
+  end
 end
