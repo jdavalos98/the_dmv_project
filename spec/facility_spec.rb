@@ -17,6 +17,14 @@ RSpec.describe Facility do
       expect(@facility_1.services).to eq([])
       expect(@facility_1.registered_vehicles).to eq([])
       expect(@facility_1.collected_fees).to eq(0)
+
+      expect(@facility_2).to be_an_instance_of(Facility)
+      expect(@facility_2.name).to eq('DMV Northeast Branch')
+      expect(@facility_2.address).to eq('4685 Peoria Street Suite 101 Denver CO 80239')
+      expect(@facility_2.phone).to eq('(720) 865-4600')
+      expect(@facility_2.services).to eq([])
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.collected_fees).to eq(0)
     end
   end
 
@@ -27,6 +35,24 @@ RSpec.describe Facility do
       @facility_1.add_service('Renew Drivers License')
       @facility_1.add_service('Vehicle Registration')
       expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
+
+      expect(@facility_2.services).to eq([])
+      @facility_2.add_service('New Drivers License')
+      @facility_2.add_service('Renew Drivers License')
+      @facility_2.add_service('Vehicle Registration')
+      expect(@facility_2.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
+    end
+  end
+  describe '#register_vehicle' do
+    it 'can register a vehicle if service is offered' do
+      @facility_1.add_service('Vehicle Registration')
+
+      expect(@facility_1.register_vehicle(@cruz)).to include(@cruz)
+      expect(@cruz.registration_date).to eq(Date.today)
+      expect(@cruz.plate_type).to eq(:regular)
+      expect(@facility_1.collected_fees).to eq(100)
+
+    
     end
   end
 end
