@@ -28,6 +28,12 @@ class Vehicle
   end
 
   def registration_date
-    Date.today
+    if registered?
+      Date.today
+    end
+  end
+
+  def registered? 
+    !@registration_date.nil?
   end
 end
