@@ -52,7 +52,12 @@ RSpec.describe Facility do
       expect(@cruz.plate_type).to eq(:regular)
       expect(@facility_1.collected_fees).to eq(100)
 
-    
+      @facility_1.register_vehicle(@camaro)
+      expect(@camaro.registration_date).to eq(Date.today)
+      expect(@camaro.plate_type). to eq(:antique)
+      expect(@facility_1.collected_fees).to eq(125)
+
+
     end
   end
 end

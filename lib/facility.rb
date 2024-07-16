@@ -18,7 +18,7 @@ class Facility
     return nil unless @services.include?('Vehicle Registration')
 
     if vehicle.antique?
-      vechicle.plate_type = :antique
+      vehicle.plate_type = :antique
       @collected_fees += 25
     elsif vehicle.electric_vehicle?
       vehicle.plate_type = :ev
